@@ -9,7 +9,7 @@ import Tile from './components/Tile.vue'
       <div class="bg-rose-700 p-12 text-white text-center text-7xl">O</div>
     </div>
     <div class="grid grid-cols-3 gap-1 mt-6">
-      <Tile v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9]" />
+      <Tile v-for="n in 9" />
     </div>
   </main>
 </template>
