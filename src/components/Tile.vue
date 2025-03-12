@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { store } from '../store'
+
 const card = ref('')
-const turn = ref('X')
+
 function play(event: any) {
-  card.value = turn.value
-  if (turn.value == 'X') {
-    turn.value = 'O'
-  } else if (turn.value == 'O') {
-    turn.value = 'X'
-  }
+  card.value = store.turn
+  store.switch()
 }
 </script>
 
