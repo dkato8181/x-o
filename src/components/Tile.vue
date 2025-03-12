@@ -5,6 +5,9 @@ import { store } from '../store'
 const card = ref('')
 
 function play(event: any) {
+  if (card.value != '') {
+    return
+  }
   card.value = store.turn
   store.switch()
 }
