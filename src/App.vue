@@ -8,7 +8,7 @@ import TurnBoard from './components/TurnBoard.vue'
   <main class="flex flex-col items-center justify-center bg-sky-100 h-screen">
     <TurnBoard />
     <div class="grid grid-cols-3 gap-1 mt-6">
-      <Tile v-for="n in 9" />
+      <Tile v-for="n in 9" :tileNumber="n" />
     </div>
     <div class="my-3">
       <BtnReset />
