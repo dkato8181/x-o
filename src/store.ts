@@ -19,6 +19,14 @@ let tiles: Tiles = {
 export const store = reactive({
   turn: 'X',
   tiles: tiles,
+  reset() {
+    for (let key in this.tiles) {
+      if (this.tiles.hasOwnProperty(key)) {
+        this.tiles[key] = ''
+        this.turn = 'X'
+      }
+    }
+  },
   switch() {
     if (this.turn == 'X') {
       this.turn = 'O'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { store } from '../store'
 
 const props = defineProps<{
@@ -12,11 +12,17 @@ onMounted(() => {
   card.value = store.tiles[props.tileNumber]
 })
 
-function play(event: any) {
+watch(
+  () => store.tiles[props.tileNumber],
+  () => {
+    card.value = store.tiles[props.tileNumber]
+  },
+)
+
+function play() {
   if (card.value != '') {
     return
   }
-  card.value = store.turn
   store.tiles[props.tileNumber] = store.turn
   store.switch()
 }
