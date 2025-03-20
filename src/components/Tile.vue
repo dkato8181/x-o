@@ -29,5 +29,7 @@ function play() {
 </script>
 
 <template>
-  <div @click="play" class="bg-sky-700 p-8 text-white text-center text-7xl">{{ card }}</div>
+  <div @click="play" class="w-30 h-30 bg-sky-700 p-8 text-white text-center text-7xl">
+    {{ card }}
+  </div>
 </template>
