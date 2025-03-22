@@ -33,7 +33,7 @@ function checkForMatch(arr: number[]): void {
     let end = i + 3
     let slice = arr.slice(begin, end).join('')
     if (winningCombinations.includes(slice)) {
-      alert(turn + ' wins')
+      alert(store.turn + ' wins')
     }
   }
 }
