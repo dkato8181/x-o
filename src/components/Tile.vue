@@ -24,6 +24,7 @@ function play() {
     return
   }
   store.tiles[props.tileNumber] = store.turn
+  store.addMove(props.tileNumber)
   store.switch()
 }
 </script>
