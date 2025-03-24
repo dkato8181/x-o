@@ -16,13 +16,13 @@ let tiles: Tiles = {
   9: '',
 }
 
-let turn = 'X'
+let turn: string = 'X'
 
 let movesX: number[] = []
 
 let movesO: number[] = []
 
-let winningCombinations = ['123', '456', '789', '147', '258', '369', '159', '357']
+let winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
 
 function checkForMatch(arr: number[]): void {
   if (arr.length < 3) {
