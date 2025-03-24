@@ -20,11 +20,18 @@ watch(
 )
 
 function play() {
+  if (store.gameDone) {
+    return
+  }
   if (card.value != '') {
     return
   }
   store.tiles[props.tileNumber] = store.turn
   store.addMove(props.tileNumber)
+  if (store.checkForMatch(store.turn)) {
+    alert(store.turn + ' WINS!!!')
+    return
+  }
   store.switch()
 }
 </script>
