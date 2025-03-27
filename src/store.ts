@@ -29,15 +29,16 @@ const moves: Moves = {
 
 const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
 
+const winningPattern: number[] = []
+
 function checkForMatch(turn: string): boolean {
   if (store.moves[turn].length < 3) {
     return false
   }
   for (let i = 0; i <= store.moves[turn].length - 3; i++) {
-    let begin = i
-    let end = i + 3
-    let slice = store.moves[turn].slice(begin, end).join('')
-    if (winningCombinations.includes(slice)) {
+    const slice = store.moves[turn].slice(i, i + 3)
+    if (winningCombinations.includes(slice.join(''))) {
+      store.winningPattern = slice
       store.gameDone = true
       return true
     }
@@ -50,6 +51,7 @@ export const store = reactive({
   turn: turn,
   tiles: tiles,
   moves: moves,
+  winningPattern: winningPattern,
   reset() {
     for (let key in this.tiles) {
       if (this.tiles.hasOwnProperty(key)) {
@@ -59,6 +61,7 @@ export const store = reactive({
     this.turn = 'X'
     this.moves['X'] = []
     this.moves['O'] = []
+    store.winningPattern = []
     this.gameDone = false
   },
   switch() {
