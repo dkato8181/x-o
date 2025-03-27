@@ -8,7 +8,7 @@ type Moves = {
   [key: string]: number[]
 }
 
-let tiles: Tiles = {
+const tiles: Tiles = {
   1: '',
   2: '',
   3: '',
@@ -20,14 +20,14 @@ let tiles: Tiles = {
   9: '',
 }
 
-let turn: string = 'X'
+const turn: string = 'X'
 
-let moves: Moves = {
+const moves: Moves = {
   X: [],
   O: [],
 }
 
-let winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
+const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
 
 function checkForMatch(turn: string): boolean {
   if (store.moves[turn].length < 3) {
