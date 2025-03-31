@@ -45,10 +45,10 @@ function play() {
 <template>
   <div
     @click="play"
-    class="w-30 h-30 bg-sky-700 p-8 text-white text-center text-7xl hover:bg-sky-800"
-    :class="{
-      'font-bold bg-sky-900 scale-108': inWinningPattern,
-    }"
+    :class="[
+      inWinningPattern ? 'font-bold bg-sky-900 scale-108' : 'bg-sky-700',
+      'w-30 h-30 p-8 text-white text-7xl text-center hover:bg-sky-800',
+    ]"
   >
     {{ card }}
   </div>

@@ -5,14 +5,18 @@ import { store } from '../store'
 <template>
   <div class="grid grid-cols-2 gap-1 mb-6">
     <div
-      class="bg-rose-600 p-12 text-white text-center text-7xl"
-      :class="{ 'font-bold': store.turn == 'X', 'bg-rose-700': store.turn == 'X' }"
+      :class="[
+        store.turn == 'X' ? 'font-bold bg-rose-700 scale-108' : 'bg-rose-600',
+        'p-12 text-white text-center text-7xl',
+      ]"
     >
       X
     </div>
     <div
-      class="bg-rose-600 p-12 text-white text-center text-7xl"
-      :class="{ 'font-bold': store.turn == 'O', 'bg-rose-700': store.turn == 'O' }"
+      :class="[
+        store.turn == 'O' ? 'font-bold bg-rose-700 scale-108' : 'bg-rose-600',
+        'p-12 text-white text-center text-7xl',
+      ]"
     >
       O
     </div>
