@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import sound from './assets/sound/level-completed.wav'
 
 type Tiles = {
   [key: number]: string
@@ -30,6 +31,8 @@ const moves: Moves = {
 const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
 
 const winningPattern: number[] = []
+
+const audio = new Audio(sound)
 
 function checkForMatch(turn: string): boolean {
   if (store.moves[turn].length < 3) {
@@ -76,4 +79,8 @@ export const store = reactive({
     store.moves[this.turn].sort()
   },
   checkForMatch: checkForMatch,
+  playSound: function playSound(): void {
+    audio.volume = 0.3
+    audio.play()
+  },
 })

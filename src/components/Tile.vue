@@ -33,6 +33,7 @@ function play() {
   store.tiles[props.tileNumber] = store.turn
   store.addMove(props.tileNumber)
   if (store.checkForMatch(store.turn)) {
+    store.playSound()
     setTimeout(() => {
       alert(store.turn + ' WINS!!!')
     }, 500)
