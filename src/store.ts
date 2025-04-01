@@ -32,7 +32,7 @@ const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369',
 
 const winningPattern: number[] = []
 
-const audio = new Audio(sound)
+const audio: HTMLAudioElement = new Audio(sound)
 
 function checkForMatch(turn: string): boolean {
   if (store.moves[turn].length < 3) {
