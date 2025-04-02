@@ -67,14 +67,14 @@ export const store = reactive({
     store.winningPattern = []
     this.gameDone = false
   },
-  switch() {
+  switch(): void {
     if (this.turn == 'X') {
       this.turn = 'O'
     } else if (this.turn == 'O') {
       this.turn = 'X'
     }
   },
-  addMove(t: number) {
+  addMove(t: number): void {
     store.moves[this.turn].push(t)
     store.moves[this.turn].sort()
   },
