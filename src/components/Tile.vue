@@ -23,7 +23,7 @@ watch(
   },
 )
 
-function play() {
+function setTile(): void {
   if (store.gameDone) {
     return
   }
@@ -45,7 +45,7 @@ function play() {
 
 <template>
   <div
-    @click="play"
+    @click="setTile"
     :class="[
       inWinningPattern ? 'font-bold bg-sky-900 scale-108' : 'bg-sky-700',
       'w-30 h-30 p-8 text-white text-7xl text-center hover:bg-sky-800',
