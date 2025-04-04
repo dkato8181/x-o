@@ -9,6 +9,10 @@ type Moves = {
   [key: string]: number[]
 }
 
+type SwapMap = {
+  [key: string]: string
+}
+
 const tiles: Tiles = {
   1: '',
   2: '',
@@ -21,7 +25,7 @@ const tiles: Tiles = {
   9: '',
 }
 
-const turn: string = 'X'
+let turn: string = 'X'
 
 const moves: Moves = {
   X: [],
@@ -34,12 +38,17 @@ const winningPattern: number[] = []
 
 const audio: HTMLAudioElement = new Audio(sound)
 
+const swapMap: SwapMap = {
+  X: 'O',
+  O: 'X',
+}
+
 function checkForMatch(turn: string): boolean {
-  if (store.moves[turn].length < 3) {
+  if (moves[turn].length < 3) {
     return false
   }
-  for (let i = 0; i <= store.moves[turn].length - 3; i++) {
-    const slice = store.moves[turn].slice(i, i + 3)
+  for (let i = 0; i <= moves[turn].length - 3; i++) {
+    const slice = moves[turn].slice(i, i + 3)
     if (winningCombinations.includes(slice.join(''))) {
       store.winningPattern = slice
       store.gameDone = true
@@ -49,12 +58,37 @@ function checkForMatch(turn: string): boolean {
   return false
 }
 
+function swap(): void {
+  store.turn = swapMap[store.turn]
+}
+
+function addMove(t: number): void {
+  moves[store.turn].push(t)
+  moves[store.turn].sort()
+}
+
+function playSound(): void {
+  audio.volume = 0.3
+  audio.play()
+}
+
 export const store = reactive({
   gameDone: false,
   turn: turn,
   tiles: tiles,
-  moves: moves,
   winningPattern: winningPattern,
+  play(tileNumber: number): void {
+    this.tiles[tileNumber] = this.turn
+    addMove(tileNumber)
+    if (checkForMatch(this.turn)) {
+      playSound()
+      setTimeout(() => {
+        alert(this.turn + ' WINS!!!')
+      }, 500)
+      return
+    }
+    swap()
+  },
   reset() {
     for (let key in this.tiles) {
       if (this.tiles.hasOwnProperty(key)) {
@@ -62,25 +96,9 @@ export const store = reactive({
       }
     }
     this.turn = 'X'
-    this.moves['X'] = []
-    this.moves['O'] = []
-    store.winningPattern = []
+    moves['X'] = []
+    moves['O'] = []
+    this.winningPattern = []
     this.gameDone = false
-  },
-  switch(): void {
-    if (this.turn == 'X') {
-      this.turn = 'O'
-    } else if (this.turn == 'O') {
-      this.turn = 'X'
-    }
-  },
-  addMove(t: number): void {
-    store.moves[this.turn].push(t)
-    store.moves[this.turn].sort()
-  },
-  checkForMatch: checkForMatch,
-  playSound: function playSound(): void {
-    audio.volume = 0.3
-    audio.play()
   },
 })

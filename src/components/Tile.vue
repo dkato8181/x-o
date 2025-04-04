@@ -30,16 +30,7 @@ function setTile(): void {
   if (card.value != '') {
     return
   }
-  store.tiles[props.tileNumber] = store.turn
-  store.addMove(props.tileNumber)
-  if (store.checkForMatch(store.turn)) {
-    store.playSound()
-    setTimeout(() => {
-      alert(store.turn + ' WINS!!!')
-    }, 500)
-    return
-  }
-  store.switch()
+  store.play(props.tileNumber)
 }
 </script>
 
