@@ -6,6 +6,8 @@ const props = defineProps<{
   tileNumber: number
 }>()
 
+const emit = defineEmits(['computerTurn'])
+
 const card = ref('')
 
 const inWinningPattern = computed(() => {
@@ -31,6 +33,7 @@ function setTile(): void {
     return
   }
   store.play(props.tileNumber)
+  emit('computerTurn')
 }
 </script>
 

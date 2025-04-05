@@ -34,6 +34,8 @@ const moves: Moves = {
 
 const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
 
+const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 const winningPattern: number[] = []
 
 const audio: HTMLAudioElement = new Audio(sound)
@@ -67,6 +69,11 @@ function addMove(t: number): void {
   moves[store.turn].sort()
 }
 
+function removeTileNumber(tileNumber: number): void {
+  const index: number = store.possibleValues.indexOf(tileNumber)
+  store.possibleValues.splice(index, 1)
+}
+
 function playSound(): void {
   audio.volume = 0.3
   audio.play()
@@ -76,10 +83,13 @@ export const store = reactive({
   gameDone: false,
   turn: turn,
   tiles: tiles,
+  moves: moves,
+  possibleValues: possibleValues,
   winningPattern: winningPattern,
   play(tileNumber: number): void {
     this.tiles[tileNumber] = this.turn
     addMove(tileNumber)
+    removeTileNumber(tileNumber)
     if (checkForMatch(this.turn)) {
       playSound()
       setTimeout(() => {
@@ -99,6 +109,7 @@ export const store = reactive({
     moves['X'] = []
     moves['O'] = []
     this.winningPattern = []
+    this.possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     this.gameDone = false
   },
 })
