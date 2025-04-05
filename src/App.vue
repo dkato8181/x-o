@@ -10,7 +10,10 @@ function setTile(): void {
   }
   const tileNumber: number =
     store.possibleValues[Math.floor(Math.random() * store.possibleValues.length)]
-  store.play(tileNumber)
+
+  setTimeout(() => {
+    store.play(tileNumber)
+  }, 1000)
 }
 </script>
 
