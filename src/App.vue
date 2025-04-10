@@ -8,9 +8,7 @@ function setTile(): void {
   if (store.gameDone) {
     return
   }
-  const tileNumber: number =
-    store.possibleValues[Math.floor(Math.random() * store.possibleValues.length)]
-
+  const tileNumber: number = store.getBestNumber(store.turn)
   setTimeout(() => {
     store.play(tileNumber)
   }, 1000)

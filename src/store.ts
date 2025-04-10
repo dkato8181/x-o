@@ -13,6 +13,10 @@ type SwapMap = {
   [key: string]: string
 }
 
+type defenseCombination = {
+  [key: string]: number
+}
+
 const tiles: Tiles = {
   1: '',
   2: '',
@@ -33,6 +37,33 @@ const moves: Moves = {
 }
 
 const winningCombinations: string[] = ['123', '456', '789', '147', '258', '369', '159', '357']
+
+const defenseCombinations: defenseCombination = {
+  '12': 3,
+  '23': 1,
+  '13': 2,
+  '45': 6,
+  '56': 4,
+  '46': 5,
+  '78': 9,
+  '89': 7,
+  '79': 8,
+  '14': 7,
+  '47': 1,
+  '17': 4,
+  '25': 8,
+  '58': 2,
+  '28': 5,
+  '36': 9,
+  '69': 3,
+  '39': 6,
+  '15': 9,
+  '59': 1,
+  '19': 5,
+  '35': 7,
+  '57': 3,
+  '37': 5,
+}
 
 const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -79,6 +110,25 @@ function playSound(): void {
   audio.play()
 }
 
+function getBestNumber(turn: string): number {
+  const opponentTurn = swapMap[turn]
+  let bestNumber: number =
+    store.possibleValues[Math.floor(Math.random() * store.possibleValues.length)]
+  if (moves[opponentTurn].length < 2) {
+    return bestNumber
+  }
+  for (let i = 0; i <= moves[opponentTurn].length - 2; i++) {
+    const slice = moves[opponentTurn].slice(i, i + 2)
+    if (defenseCombinations.hasOwnProperty(slice.join(''))) {
+      let possibleNumber = defenseCombinations[slice.join('')]
+      if (!moves[turn].includes(possibleNumber)) {
+        return possibleNumber
+      }
+    }
+  }
+  return bestNumber
+}
+
 export const store = reactive({
   gameDone: false,
   turn: turn,
@@ -112,4 +162,5 @@ export const store = reactive({
     this.possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     this.gameDone = false
   },
+  getBestNumber: getBestNumber,
 })
